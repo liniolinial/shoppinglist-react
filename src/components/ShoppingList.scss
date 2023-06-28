@@ -1,20 +1,15 @@
 .ShoppingList-container {
   margin: 0 auto;
   padding: 35px 0;
-  background-color: rgb(222, 218, 247);
-  //   width: max-content;
+  width: max-content;
 }
 
 .ul-ShoppingList {
-  padding-right: 300px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 }
 
-.li-shoppingList {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.li-h4 {
+.item-ShoppingList {
   font-size: 1.1rem;
   font-weight: bolder;
 }
@@ -22,4 +17,8 @@
 h1,
 hr {
   margin: 0;
+}
+
+h3 {
+  margin: 40px 0 60px 0;
 }

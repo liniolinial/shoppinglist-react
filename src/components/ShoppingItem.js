@@ -89,29 +89,37 @@ export default class ShoppingItem extends Component {
 
     if (this.state.editing) {
       result = (
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor='name'>Item: </label>
-          <input
-            id='name'
-            name='name'
-            value={this.state.name}
-            onChange={this.handleChange}
-          />
-          <label htmlFor='qty'>Quantity: </label>
-          <input
-            id='qty'
-            name='qty'
-            value={this.state.qty}
-            onChange={this.handleChange}
-          />
-          <label htmlFor='cost'>Price(€): </label>
-          <input
-            id='cost'
-            name='cost'
-            value={this.state.cost}
-            onChange={this.handleChange}
-          />
-          <button>SAVE</button>
+        <form className='shoppingItem-container' onSubmit={this.handleSubmit}>
+          <div className='form-flex-in-grid'>
+            <label htmlFor='name'>Item: </label>
+            <input
+              id='name'
+              name='name'
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className='form-flex-in-grid'>
+            <label htmlFor='qty'>Quantity: </label>
+            <input
+              id='qty'
+              name='qty'
+              value={this.state.qty}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className='form-flex-in-grid'>
+            <label htmlFor='cost'>Price(€): </label>
+            <input
+              id='cost'
+              name='cost'
+              value={this.state.cost}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className='form-flex-in-grid'>
+            <button>SAVE</button>
+          </div>
         </form>
       );
       return result;
@@ -120,27 +128,18 @@ export default class ShoppingItem extends Component {
     // toggle sollte einzelne funktionieren -jeweils in span
     return (
       <div className='shoppingItem-container'>
-        <ul className='ul-shoppingItem'>
-          <li className='li-shoppingItem' key={this.props.id}>
-            <div className='test'>
-              <span
-                className={`${
-                  this.props.completed ? "completed" : ""
-                } span-style`}
-                onClick={this.handleToggle}>
-                {this.state.name}{" "}
-              </span>
-              <span
-                className={`${
-                  this.props.completed ? "completed" : ""
-                } span-style`}
-                onClick={this.handleToggle}>
-                {this.state.qty}{" "}
-              </span>
-              <span className='span-style'>{this.state.cost}€ </span>{" "}
-              <span className='span-style'>{this.state.proCost}€ </span>
-            </div>
-          </li>
+        <ul className='ul-shoppingItem' key={this.props.id}>
+          <span
+            className={this.props.completed ? "completed" : ""}
+            onClick={this.handleToggle}>
+            {this.state.name}{" "}
+          </span>
+          <span
+            className={this.props.completed ? "completed" : ""}
+            onClick={this.handleToggle}>
+            {this.state.qty}{" "}
+          </span>
+          <span>{this.state.cost}€ </span> <span>{this.state.proCost}€ </span>
           <div className='edit-remove-btn-container'>
             <button onClick={this.handleUpdate}>edit</button>
             <button onClick={this.handleRemove}>X</button>

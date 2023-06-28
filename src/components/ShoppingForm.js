@@ -34,28 +34,36 @@ export default class ShoppingForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor='name'>Item: </label>
-        <input
-          id='name'
-          name='name'
-          value={this.state.name}
-          onChange={this.handleChange}
-        />
-        <label htmlFor='qty'>Quantity: </label>
-        <input
-          id='qty'
-          name='qty'
-          value={this.state.qty}
-          onChange={this.handleChange}
-        />
-        <label htmlFor='cost'>Price(€): </label>
-        <input
-          id='cost'
-          name='cost'
-          value={this.state.cost}
-          onChange={this.handleChange}
-        />
-        <button>ADD ITEMS</button>
+        <div className='form-flex-in-grid'>
+          <label htmlFor='name'>Item: </label>
+          <input
+            id='name'
+            name='name'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className='form-flex-in-grid'>
+          <label htmlFor='qty'>Quantity: </label>
+          <input
+            id='qty'
+            name='qty'
+            value={this.state.qty}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className='form-flex-in-grid'>
+          <label htmlFor='cost'>Price(€): </label>
+          <input
+            id='cost'
+            name='cost'
+            value={this.state.cost}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className='form-flex-in-grid'>
+          <button>ADD</button>
+        </div>
       </form>
     );
   }

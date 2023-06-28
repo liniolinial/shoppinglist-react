@@ -89,12 +89,10 @@ export default class ShoppingList extends Component {
         <h1>Shopping List</h1>
         <ul className='ul-ShoppingList'>
           {" "}
-          <li className='li-shoppingList'>
-            <span className='li-h4'>Item</span>{" "}
-            <span className='li-h4'>Quantity</span>{" "}
-            <span className='li-h4'>Price(€)</span>{" "}
-            <span className='li-h4'>Single Price(€)</span>
-          </li>
+          <span className='item-ShoppingList'>Item</span>{" "}
+          <span className='item-ShoppingList'>Quantity</span>{" "}
+          <span className='item-ShoppingList'>Price(€)</span>{" "}
+          <span className='item-ShoppingList'>Single Price(€)</span>
         </ul>
         <hr></hr>
         {items}
