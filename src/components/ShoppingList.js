@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import ShoppingForm from "./ShoppingForm";
 import ShoppingItem from "./ShoppingItem";
+import "./ShoppingList.css";
+import { toBeInTheDocument } from "@testing-library/jest-dom/matchers";
 
 export default class ShoppingList extends Component {
   constructor(props) {
@@ -11,6 +13,7 @@ export default class ShoppingList extends Component {
     this.handleRemove = this.handleRemove.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleRemove(id) {
@@ -23,6 +26,19 @@ export default class ShoppingList extends Component {
     const updatedItems = this.state.items.map((item) => {
       if (item.id === id) {
         return updatedItem;
+      } else {
+        return item;
+      }
+    });
+    this.setState({
+      items: updatedItems,
+    });
+  }
+
+  handleToggle(updatedItem, id) {
+    const updatedItems = this.state.items.map((item) => {
+      if (item.name === id && item.qty === id) {
+        return { ...item.name, ...item.qty, completed: !item.completed };
       } else {
         return item;
       }
@@ -48,17 +64,18 @@ export default class ShoppingList extends Component {
         cost={item.cost}
         proCost={item.proCost}
         onUpdate={this.handleUpdate}
+        onToggle={this.handleToggle}
         onRemove={this.handleRemove}
       />
     ));
 
     //  {/* hier sum: array Methode> bisherige price alle zusammen rechenen/ += für cost */}
-    // method1
+    // idea1
     let priceSum = 0;
     this.state.items.forEach((item) => {
       priceSum += +item.cost;
     });
-    // method2
+    // idea2
     // const priceSum = this.state.items.reduce((accumulator, item) => {
     //   return accumulator + +item.cost;
     // }, 0);
@@ -68,7 +85,8 @@ export default class ShoppingList extends Component {
         <h1>Shopping List</h1>
         <ul>
           <li>
-            Item__________Quantity__________Price(€)__________Single Price(€)
+            <span>Item</span> <span>Quantity</span> <span>Price(€)</span>{" "}
+            <span>Single Price(€)</span>
           </li>
         </ul>
         {items}

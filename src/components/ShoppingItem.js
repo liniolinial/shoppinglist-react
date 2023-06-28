@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "./ShoppingItem.css";
+import { isElementType } from "@testing-library/user-event/dist/utils";
 
 export default class ShoppingItem extends Component {
   constructor(props) {
@@ -10,7 +12,7 @@ export default class ShoppingItem extends Component {
       cost: this.props.cost,
       proCost:
         this.props.cost !== 0 && this.props.cost !== ""
-          ? this.props.cost / this.props.qty
+          ? (this.props.cost / this.props.qty).toFixed(2)
           : 0,
     };
     this.handleRemove = this.handleRemove.bind(this);
@@ -19,6 +21,7 @@ export default class ShoppingItem extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleUpdateProCost = this.handleUpdateProCost.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleUpdate() {
@@ -26,7 +29,7 @@ export default class ShoppingItem extends Component {
       editing: true,
     });
   }
-  // vllt proCost update auch bei hier
+
   handleRemove() {
     this.props.onRemove(this.props.id);
   }
@@ -51,6 +54,7 @@ export default class ShoppingItem extends Component {
   }
 
   //proCost sollte automatisch nach der User eingabe geupdated sein
+  // noch ein Update
   handleUpdateProCost() {
     const { cost, qty } = this.state;
     const numCost = +cost;
@@ -59,11 +63,13 @@ export default class ShoppingItem extends Component {
       numCost !== 0 && !isNaN(numCost) && !isNaN(numQty) && numQty !== 0
         ? numCost / numQty
         : 0;
+    const roundedUpdatedProCost = updatedProCost.toFixed(2);
     this.setState({
-      proCost: updatedProCost,
+      proCost: roundedUpdatedProCost,
     });
   }
 
+  //vllt hier proCost update, weil bei changes von anderen Values sollte proCost sich auch ändern
   handleChange(e) {
     this.setState(
       {
@@ -71,6 +77,11 @@ export default class ShoppingItem extends Component {
       },
       this.handleUpdateProCost,
     );
+  }
+
+  handleToggle(e) {
+    this.props.onToggle(this.props.name, this.props.qty);
+    // wenn id nicht erkenntbar ist, dann mit name und qty
   }
 
   render() {
@@ -103,16 +114,22 @@ export default class ShoppingItem extends Component {
       return result;
     }
 
+    // toggle sollte einzelne funktionieren -jeweils in span
     return (
       <div>
         <ul>
           <li key={this.props.id}>
-            {/* {this.props.name}:{this.props.qty}:{this.props.cost}:
-          {this.state.proCost} */}
-            {this.state.name}__________{this.state.qty}__________
-            {this.state.cost}
-            €__________
-            {this.state.proCost}€{/* proCost updated sich nicht */}
+            <span
+              className={this.props.completed ? "completed" : ""}
+              onClick={this.handleToggle}>
+              {this.state.name}{" "}
+            </span>
+            <span
+              className={this.props.completed ? "completed" : ""}
+              onClick={this.handleToggle}>
+              {this.state.qty}{" "}
+            </span>
+            <span>{this.state.cost}€ </span> <span>{this.state.proCost}€ </span>
           </li>
           <button onClick={this.handleUpdate}>edit</button>
           <button onClick={this.handleRemove}>X</button>
