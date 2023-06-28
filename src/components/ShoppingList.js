@@ -37,11 +37,14 @@ export default class ShoppingList extends Component {
 
   handleToggle(id) {
     const updatedItems = this.state.items.map((item) => {
-      if (item.name === id && item.qty === id) {
+      if (item.id === id) {
         return {
           ...item,
-          completed: !item.name.completed && !item.qty.completed,
+          completed: !item.name.completed || item.qty.completed,
         };
+        // item.name.completed && item.qty.completed
+        // !item.completed,
+        // if item.name.id === id && item.qty.id === id
       } else {
         return item;
       }

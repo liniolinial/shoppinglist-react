@@ -1,6 +1,9 @@
 .completed {
   text-decoration: line-through;
   color: black;
+  &:hover {
+    color: red;
+  }
 }
 
 .shoppingItem-container {

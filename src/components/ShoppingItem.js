@@ -18,7 +18,6 @@ export default class ShoppingItem extends Component {
     this.handleRemove = this.handleRemove.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleUpdateProCost = this.handleUpdateProCost.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
@@ -80,8 +79,7 @@ export default class ShoppingItem extends Component {
   }
 
   handleToggle(e) {
-    this.props.onToggle(this.props.name, this.props.qty);
-    // wenn id nicht erkenntbar ist, dann mit name und qty
+    this.props.onToggle(this.props.id);
   }
 
   render() {
@@ -130,14 +128,14 @@ export default class ShoppingItem extends Component {
       <div className='shoppingItem-container'>
         <ul className='ul-shoppingItem' key={this.props.id}>
           <span
-            className={this.props.completed ? "completed" : ""}
+            className={this.props.completed && "completed"}
             onClick={this.handleToggle}>
-            {this.state.name}{" "}
+            {this.state.name}
           </span>
           <span
-            className={this.props.completed ? "completed" : ""}
+            className={this.props.completed && "completed"}
             onClick={this.handleToggle}>
-            {this.state.qty}{" "}
+            {this.state.qty}
           </span>
           <span>{this.state.cost}€ </span> <span>{this.state.proCost}€ </span>
           <div className='edit-remove-btn-container'>
