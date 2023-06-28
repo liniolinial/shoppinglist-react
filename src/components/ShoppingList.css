@@ -1,1 +1,24 @@
-/*# sourceMappingURL=ShoppingList.css.map */
+.ShoppingList-container {
+  margin: 0 auto;
+  padding: 35px 0;
+  background-color: rgb(222, 218, 247);
+}
+
+.ul-ShoppingList {
+  padding-right: 300px;
+}
+
+.li-shoppingList {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.li-h4 {
+  font-size: 1.1rem;
+  font-weight: bolder;
+}
+
+h1,
+hr {
+  margin: 0;
+}/*# sourceMappingURL=ShoppingList.css.map */

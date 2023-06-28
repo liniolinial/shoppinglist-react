@@ -35,10 +35,13 @@ export default class ShoppingList extends Component {
     });
   }
 
-  handleToggle(updatedItem, id) {
+  handleToggle(id) {
     const updatedItems = this.state.items.map((item) => {
       if (item.name === id && item.qty === id) {
-        return { ...item.name, ...item.qty, completed: !item.completed };
+        return {
+          ...item,
+          completed: !item.name.completed && !item.qty.completed,
+        };
       } else {
         return item;
       }
@@ -63,6 +66,7 @@ export default class ShoppingList extends Component {
         qty={item.qty}
         cost={item.cost}
         proCost={item.proCost}
+        completed={item.completed}
         onUpdate={this.handleUpdate}
         onToggle={this.handleToggle}
         onRemove={this.handleRemove}
@@ -81,14 +85,18 @@ export default class ShoppingList extends Component {
     // }, 0);
 
     return (
-      <div>
+      <div className='ShoppingList-container'>
         <h1>Shopping List</h1>
-        <ul>
-          <li>
-            <span>Item</span> <span>Quantity</span> <span>Price(€)</span>{" "}
-            <span>Single Price(€)</span>
+        <ul className='ul-ShoppingList'>
+          {" "}
+          <li className='li-shoppingList'>
+            <span className='li-h4'>Item</span>{" "}
+            <span className='li-h4'>Quantity</span>{" "}
+            <span className='li-h4'>Price(€)</span>{" "}
+            <span className='li-h4'>Single Price(€)</span>
           </li>
         </ul>
+        <hr></hr>
         {items}
         <h3>Price Sum: {priceSum} €</h3>
         <ShoppingForm onCreate={this.handleCreate} />

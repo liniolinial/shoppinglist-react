@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"ShoppingList.css"}
+{"version":3,"sources":["ShoppingList.scss","ShoppingList.css"],"names":[],"mappings":"AAAA;EACE,cAAA;EACA,eAAA;EACA,oCAAA;ACCF;;ADGA;EACE,oBAAA;ACAF;;ADGA;EACE,aAAA;EACA,6BAAA;ACAF;;ADGA;EACE,iBAAA;EACA,mBAAA;ACAF;;ADGA;;EAEE,SAAA;ACAF","file":"ShoppingList.css"}

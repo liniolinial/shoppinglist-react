@@ -34,4 +34,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+button,
+input,
+label {
+  font-size: 1.2rem;
+}
+
+input {
+  width: 80px;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px;
+  margin-right: 40px;
+}
+
+button {
+  padding: 5px 10px;
 }/*# sourceMappingURL=App.css.map */

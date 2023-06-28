@@ -1,4 +1,40 @@
 .completed {
-  color: lightgray;
   text-decoration: line-through;
+  color: black;
+}
+
+.shoppingItem-container {
+  padding: 10px 0;
+  font-size: 1.2rem;
+  margin: 0;
+
+  &:nth-child(2n-1) {
+    background-color: white;
+  }
+
+  &:nth-child(2n) {
+    background-color: rgb(233, 233, 233);
+  }
+}
+
+.ul-shoppingItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  padding: 0;
+}
+.span-style {
+  //   justify-content: space-around;
+  padding: 0 120px;
+  text-align: left;
+}
+
+.edit-remove-btn-container {
+  display: flex;
+  flex-direction: row;
+
+  button {
+    justify-content: space-between;
+  }
 }
