@@ -6,8 +6,8 @@ export default class ShoppingForm extends Component {
     super(props);
     this.state = {
       name: "",
-      qty: null,
-      cost: null,
+      qty: "",
+      cost: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,7 +33,7 @@ export default class ShoppingForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor='name'>Name: </label>
+        <label htmlFor='name'>Item: </label>
         <input
           id='name'
           name='name'

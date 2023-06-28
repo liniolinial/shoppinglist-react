@@ -10,11 +10,25 @@ export default class ShoppingList extends Component {
     };
     this.handleRemove = this.handleRemove.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
 
   handleRemove(id) {
     this.setState({
       items: this.state.items.filter((item) => item.id !== id),
+    });
+  }
+
+  handleUpdate(updatedItem, id) {
+    const updatedItems = this.state.items.map((item) => {
+      if (item.id === id) {
+        return updatedItem;
+      } else {
+        return item;
+      }
+    });
+    this.setState({
+      items: updatedItems,
     });
   }
 
@@ -32,16 +46,19 @@ export default class ShoppingList extends Component {
         name={item.name}
         qty={item.qty}
         cost={item.cost}
+        proCost={item.proCost}
+        onUpdate={this.handleUpdate}
         onRemove={this.handleRemove}
       />
     ));
 
     //  {/* hier sum: array Methode> bisherige price alle zusammen rechenen/ += für cost */}
+    // method1
     let priceSum = 0;
     this.state.items.forEach((item) => {
       priceSum += +item.cost;
     });
-
+    // method2
     // const priceSum = this.state.items.reduce((accumulator, item) => {
     //   return accumulator + +item.cost;
     // }, 0);
@@ -49,9 +66,14 @@ export default class ShoppingList extends Component {
     return (
       <div>
         <h1>Shopping List</h1>
-        <ShoppingForm onCreate={this.handleCreate} />
+        <ul>
+          <li>
+            Item__________Quantity__________Price(€)__________Single Price(€)
+          </li>
+        </ul>
         {items}
-        <h3>Price Sum: {priceSum}</h3>
+        <h3>Price Sum: {priceSum} €</h3>
+        <ShoppingForm onCreate={this.handleCreate} />
       </div>
     );
   }
