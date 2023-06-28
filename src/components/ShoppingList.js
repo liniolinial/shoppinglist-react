@@ -43,8 +43,6 @@ export default class ShoppingList extends Component {
           completed: !item.name.completed || item.qty.completed,
         };
         // item.name.completed && item.qty.completed
-        // !item.completed,
-        // if item.name.id === id && item.qty.id === id
       } else {
         return item;
       }
