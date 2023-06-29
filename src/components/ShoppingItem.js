@@ -123,7 +123,7 @@ export default class ShoppingItem extends Component {
             />
           </div>
           <div className='form-flex-in-grid'>
-            <button>SAVE</button>
+            <button>Save</button>
           </div>
         </form>
       );
@@ -146,7 +146,7 @@ export default class ShoppingItem extends Component {
           </span>
           <span>{this.state.cost}€ </span> <span>{this.state.proCost}€ </span>
           <div className='edit-remove-btn-container'>
-            <button onClick={this.handleUpdate}>edit</button>
+            <button onClick={this.handleUpdate}>Edit</button>
             <button onClick={this.handleRemove}>X</button>
           </div>
         </ul>

@@ -53,11 +53,16 @@ label {
 input {
   width: 4.5rem;
   border-radius: 5px;
-  outline-style: groove;
+  outline-style: hidden;
+  outline-color: rgb(255, 179, 0);
   background-color: white;
   padding: 5px;
 }
+input:hover {
+  outline-width: 3px;
+}
 
 button {
-  padding: 5px 10px;
+  padding: 3px 8px;
+  border-radius: 5px;
 }/*# sourceMappingURL=App.css.map */

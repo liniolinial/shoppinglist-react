@@ -62,7 +62,7 @@ export default class ShoppingForm extends Component {
           />
         </div>
         <div className='form-flex-in-grid'>
-          <button>ADD</button>
+          <button>Add</button>
         </div>
       </form>
     );
