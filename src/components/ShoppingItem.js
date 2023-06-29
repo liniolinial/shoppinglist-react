@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./ShoppingItem.css";
-import { isElementType } from "@testing-library/user-event/dist/utils";
+// import ReactDOM from "react-dom";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default class ShoppingItem extends Component {
   constructor(props) {
@@ -83,6 +85,11 @@ export default class ShoppingItem extends Component {
   }
 
   render() {
+    // const remove = (
+    //   <FontAwesomeIcon icon={faTrash} style={{ color: "#87898c" }} />
+    // );
+    // ReactDOM.render(remove, document.body);
+
     let result;
 
     if (this.state.editing) {

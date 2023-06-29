@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import ShoppingForm from "./ShoppingForm";
 import ShoppingItem from "./ShoppingItem";
 import "./ShoppingList.css";
-import { toBeInTheDocument } from "@testing-library/jest-dom/matchers";
+// import ReactDOM from "react-dom";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
+// const remove = <FontAwesomeIcon icon={faTrash} style={{ color: "#87898c" }} />;
+// ReactDOM.render(remove, document.body);
 
 export default class ShoppingList extends Component {
   constructor(props) {
