@@ -37,13 +37,8 @@
   }
 }
 
-ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-button,
-input,
+.general-input,
+.general-btn,
 label {
   font-size: 1.2rem;
 }
@@ -52,20 +47,20 @@ label {
   padding-right: 0.8rem;
 }
 
-input {
+.general-input {
   width: 4.5rem;
   border-radius: 5px;
   outline-style: hidden;
   outline-color: rgb(255, 179, 0);
   background-color: white;
   padding: 5px;
+
   &:hover {
     outline-width: 3px;
   }
 }
 
-button {
+.general-btn {
   padding: 3px 8px;
   border-radius: 5px;
-  //idee: hier vllt mit icon ersetzen
 }

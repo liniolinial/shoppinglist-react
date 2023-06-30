@@ -1,24 +1,29 @@
-.ShoppingList-container {
+.ShoppingList {
   margin: 0 auto;
   padding: 35px 0;
   width: max-content;
+
+  &__h1 {
+    margin: 0;
+  }
+
+  &__h3 {
+    margin: 40px 0 60px 0;
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    list-style: none;
+    padding-left: 0;
+
+    &__item {
+      font-size: 1.1rem;
+      font-weight: bolder;
+    }
+  }
 }
 
-.ul-ShoppingList {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.item-ShoppingList {
-  font-size: 1.1rem;
-  font-weight: bolder;
-}
-
-h1,
 hr {
   margin: 0;
-}
-
-h3 {
-  margin: 40px 0 60px 0;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import "./ShoppingItem.css";
+import "./ShoppingItem.scss";
+import ShoppingForm from "./ShoppingForm";
 // import ReactDOM from "react-dom";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -12,20 +13,21 @@ export default class ShoppingItem extends Component {
       name: this.props.name,
       qty: this.props.qty,
       cost: this.props.cost,
-      proCost:
-        this.props.cost !== 0 && this.props.cost !== ""
-          ? (this.props.cost / this.props.qty).toFixed(2)
-          : 0,
+      // proCost: !!this.props.cost
+      //   ? (this.props.cost / this.props.qty).toFixed(2)
+      //   : 0,
+      proCost: this.calcProCost(this.props.qty, this.props.cost),
     };
     this.handleRemove = this.handleRemove.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleCreate = this.handleCreate.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
-    this.handleUpdateProCost = this.handleUpdateProCost.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    // this.handleUpdateProCost = this.handleUpdateProCost.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
   }
 
-  handleUpdate() {
+  handleEdit() {
     this.setState({
       editing: true,
     });
@@ -35,40 +37,43 @@ export default class ShoppingItem extends Component {
     this.props.onRemove(this.props.id);
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleUpdate(newItem) {
+    newItem.proCost = this.calcProCost(newItem.qty, newItem.cost);
     this.props.onUpdate(
-      {
-        name: this.state.name,
-        qty: this.state.qty,
-        cost: this.state.cost,
-        proCost: this.state.proCost,
-        id: this.props.id,
-      },
-      this.props.id,
-      //weil id nicht in diesem Component gibt: props.id
+      // {
+      //   name: this.state.name,
+      //   qty: this.state.qty,
+      //   cost: this.state.cost,
+      //   proCost: this.state.proCost,
+      //   id: this.props.id,
+      //   newItem
+      // },
+      newItem,
+      newItem.id,
     );
+    console.log(newItem, this.props.id);
     this.setState({
-      ...this.state,
+      ...newItem,
       editing: false,
     });
   }
 
-  //proCost sollte automatisch nach der User eingabe geupdated sein
-  // noch ein Update
-  handleUpdateProCost() {
-    const { cost, qty } = this.state;
-    const numCost = +cost;
-    const numQty = +qty;
-    const updatedProCost =
-      numCost !== 0 && !isNaN(numCost) && !isNaN(numQty) && numQty !== 0
-        ? numCost / numQty
-        : 0;
-    const roundedUpdatedProCost = updatedProCost.toFixed(2);
-    this.setState({
-      proCost: roundedUpdatedProCost,
-    });
+  calcProCost(qty, cost) {
+    return cost !== 0 && !isNaN(cost) && !isNaN(qty) && qty !== 0
+      ? (cost / qty).toFixed(2)
+      : 0;
   }
+  //proCost sollte automatisch nach der User eingabe geupdated sein
+  // handleUpdateProCost() {
+  //   const { cost, qty } = this.state;
+  //   const updatedProCost =
+  //     cost !== 0 && !isNaN(cost) && !isNaN(qty) && qty !== 0
+  //       ? (cost / qty).toFixed(2)
+  //       : 0;
+  //   this.setState({
+  //     proCost: updatedProCost,
+  //   });
+  // }
 
   //vllt hier proCost update, weil bei changes von anderen Values sollte proCost sich auch ändern
   handleChange(e) {
@@ -80,76 +85,87 @@ export default class ShoppingItem extends Component {
     );
   }
 
-  handleToggle(e) {
+  handleToggle() {
     this.props.onToggle(this.props.id);
   }
 
   render() {
-    // const remove = (
-    //   <FontAwesomeIcon icon={faTrash} style={{ color: "#87898c" }} />
-    // );
-    // ReactDOM.render(remove, document.body);
-
-    let result;
-
     if (this.state.editing) {
-      result = (
-        <form className='shoppingItem-container' onSubmit={this.handleSubmit}>
-          <div className='form-flex-in-grid'>
-            <label htmlFor='name'>Item: </label>
-            <input
-              id='name'
-              name='name'
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className='form-flex-in-grid'>
-            <label htmlFor='qty'>Quantity: </label>
-            <input
-              id='qty'
-              name='qty'
-              value={this.state.qty}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className='form-flex-in-grid'>
-            <label htmlFor='cost'>Price(€): </label>
-            <input
-              id='cost'
-              name='cost'
-              value={this.state.cost}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className='form-flex-in-grid'>
-            <button>Save</button>
-          </div>
-        </form>
+      return (
+        <ShoppingForm
+          onUpdate={this.handleUpdate}
+          name={this.state.name}
+          qty={this.state.qty}
+          cost={this.state.cost}
+          buttonLabel='save'
+          id={this.props.id}
+        />
+        // <form className='shopping-item-form' onSubmit={this.handleSubmit}>
+        //   <div>
+        //     <label htmlFor='name'>Item: </label>
+        //     <input
+        //       className='general-input'
+        //       id='name'
+        //       name='name'
+        //       value={this.state.name}
+        //       onChange={this.handleChange}
+        //     />
+        //   </div>
+        //   <div>
+        //     <label htmlFor='qty'>Quantity: </label>
+        //     <input
+        //       className='general-input'
+        //       id='qty'
+        //       name='qty'
+        //       value={this.state.qty}
+        //       onChange={this.handleChange}
+        //     />
+        //   </div>
+        //   <div>
+        //     <label htmlFor='cost'>Price(€): </label>
+        //     <input
+        //       className='general-input'
+        //       id='cost'
+        //       name='cost'
+        //       value={this.state.cost}
+        //       onChange={this.handleChange}
+        //     />
+        //   </div>
+        //   <div>
+        //     <button className='general-btn'>Save</button>
+        //   </div>
+        // </form>
       );
-      return result;
     }
 
     // toggle sollte einzelne funktionieren -jeweils in span
     return (
-      <div className='shoppingItem-container'>
-        <ul className='ul-shoppingItem' key={this.props.id}>
+      <div className='shopping-item'>
+        <div className='shopping-item__grid' key={this.props.id}>
           <span
-            className={this.props.completed && "completed"}
+            className={this.props.completed ? "completed" : ""}
             onClick={this.handleToggle}>
             {this.state.name}
           </span>
           <span
-            className={this.props.completed && "completed"}
+            className={this.props.completed ? "completed" : ""}
             onClick={this.handleToggle}>
             {this.state.qty}
           </span>
           <span>{this.state.cost}€ </span> <span>{this.state.proCost}€ </span>
-          <div className='edit-remove-btn-container'>
-            <button onClick={this.handleUpdate}>Edit</button>
-            <button onClick={this.handleRemove}>X</button>
+          <div className='shopping-item__flex'>
+            <button
+              className='shopping-item__btn general-btn'
+              onClick={this.handleEdit}>
+              Edit
+            </button>
+            <button
+              className='shopping-item__btn general-btn'
+              onClick={this.handleRemove}>
+              X
+            </button>
           </div>
-        </ul>
+        </div>
       </div>
     );
   }

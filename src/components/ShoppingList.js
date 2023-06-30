@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ShoppingForm from "./ShoppingForm";
 import ShoppingItem from "./ShoppingItem";
-import "./ShoppingList.css";
+import "./ShoppingList.scss";
 // import ReactDOM from "react-dom";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -80,30 +80,41 @@ export default class ShoppingList extends Component {
 
     //  {/* hier sum: array Methode> bisherige price alle zusammen rechenen/ += für cost */}
     // idea1
-    let priceSum = 0;
-    this.state.items.forEach((item) => {
-      priceSum += +item.cost;
-    });
+    // let priceSum = 0;
+    // this.state.items.forEach((item) => {
+    //   priceSum += +item.cost;
+    // });
+
     // idea2
     // const priceSum = this.state.items.reduce((accumulator, item) => {
     //   return accumulator + +item.cost;
     // }, 0);
 
     return (
-      <div className='ShoppingList-container'>
-        <h1>Shopping List</h1>
-        <ul className='ul-ShoppingList'>
+      <div className='ShoppingList'>
+        <h1 className='ShoppingList__h1'>Shopping List</h1>
+        <ul className='ShoppingList__items'>
           {" "}
-          <span className='item-ShoppingList'>Item</span>{" "}
-          <span className='item-ShoppingList'>Quantity</span>{" "}
-          <span className='item-ShoppingList'>Price(€)</span>{" "}
-          <span className='item-ShoppingList'>Single Price(€)</span>
+          <span className='ShoppingList__item'>Item</span>{" "}
+          <span className='ShoppingList__item'>Quantity</span>{" "}
+          <span className='ShoppingList__item'>Price(€)</span>{" "}
+          <span className='ShoppingList__item'>Single Price(€)</span>
         </ul>
         <hr></hr>
         {items}
-        <h3>Price Sum: {priceSum} €</h3>
+        <h3 className='ShoppingList__h3'>Price Sum: {this.priceSum} €</h3>
         <ShoppingForm onCreate={this.handleCreate} />
       </div>
     );
   }
+
+  get priceSum() {
+    let priceSum = 0;
+    this.state.items.forEach((item) => {
+      priceSum += +item.cost;
+    });
+
+    return priceSum;
+  }
 }
+//getter kein param, class line
